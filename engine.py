@@ -17,6 +17,7 @@ import re
 # GRADING ENGINE
 # ---------------------------------------------------------------------------
 
+
 def grade_answer(answer: str, groups: list, threshold: int = None):
     """
     groups: list of (label, [regex, ...])
@@ -36,10 +37,10 @@ def grade_answer(answer: str, groups: list, threshold: int = None):
 DANISH_SCALE = [
     (90, "12", "Fremragende"),
     (78, "10", "Fortrinlig"),
-    (60, "7",  "God"),
-    (50, "4",  "Jævn"),
+    (60, "7", "God"),
+    (50, "4", "Jævn"),
     (40, "02", "Tilstrækkelig"),
-    (0,  "00/−3", "Ikke bestået"),
+    (0, "00/−3", "Ikke bestået"),
 ]
 
 
@@ -637,18 +638,37 @@ BOARD_QUESTIONS = [
             "Nævn derefter mindst tre af de 7 Guiding Principles.'"
         ),
         "groups": [
-            ("ITIL = rammeværk for ITSM, leverandør-uafhængigt",
-             [r"itsm", r"service\s*management", r"rammev", r"framework",
-              r"best\s*practice", r"infrastructure\s+library"]),
+            (
+                "ITIL = rammeværk for ITSM, leverandør-uafhængigt",
+                [
+                    r"itsm",
+                    r"service\s*management",
+                    r"rammev",
+                    r"framework",
+                    r"best\s*practice",
+                    r"infrastructure\s+library",
+                ],
+            ),
             ("Plan", [r"\bplan\b"]),
             ("Engage", [r"engage"]),
             ("Design & Transition", [r"design", r"transition"]),
-            ("Obtain/Build + Deliver & Support + Improve",
-             [r"obtain", r"build", r"deliver", r"support", r"improve", r"forbedr"]),
-            ("Guiding Principles (focus on value, iterate, automate...)",
-             [r"focus\s+on\s+value", r"start\s+where\s+you\s+are",
-              r"iterat", r"collaborat", r"holisti", r"keep\s+it\s+simple",
-              r"optimi[sz]e\s+and\s+automate", r"automat"]),
+            (
+                "Obtain/Build + Deliver & Support + Improve",
+                [r"obtain", r"build", r"deliver", r"support", r"improve", r"forbedr"],
+            ),
+            (
+                "Guiding Principles (focus on value, iterate, automate...)",
+                [
+                    r"focus\s+on\s+value",
+                    r"start\s+where\s+you\s+are",
+                    r"iterat",
+                    r"collaborat",
+                    r"holisti",
+                    r"keep\s+it\s+simple",
+                    r"optimi[sz]e\s+and\s+automate",
+                    r"automat",
+                ],
+            ),
         ],
         "points": 8,
         "threshold": 4,
@@ -674,16 +694,29 @@ BOARD_QUESTIONS = [
             "Problem Management.'"
         ),
         "groups": [
-            ("IM = genopret service SÅ HURTIGT som muligt",
-             [r"genopret", r"restore", r"hurtig", r"as\s+fast"]),
-            ("IM bruger workarounds og kræver INGEN godkendelse",
-             [r"workaround", r"midlertidig", r"ingen\s+godkend",
-              r"no\s+approval"]),
-            ("PM = find og fjern ROOT CAUSE",
-             [r"root\s*cause", r"rod[aå]rsag", r"problem\s+management"]),
-            ("Reaktiv vs proaktiv PM",
-             [r"\b5\b.{0,30}(gang|times)", r"reactive", r"proactive",
-              r"reaktiv", r"proaktiv", r"gentag"]),
+            (
+                "IM = genopret service SÅ HURTIGT som muligt",
+                [r"genopret", r"restore", r"hurtig", r"as\s+fast"],
+            ),
+            (
+                "IM bruger workarounds og kræver INGEN godkendelse",
+                [r"workaround", r"midlertidig", r"ingen\s+godkend", r"no\s+approval"],
+            ),
+            (
+                "PM = find og fjern ROOT CAUSE",
+                [r"root\s*cause", r"rod[aå]rsag", r"problem\s+management"],
+            ),
+            (
+                "Reaktiv vs proaktiv PM",
+                [
+                    r"\b5\b.{0,30}(gang|times)",
+                    r"reactive",
+                    r"proactive",
+                    r"reaktiv",
+                    r"proaktiv",
+                    r"gentag",
+                ],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -707,16 +740,26 @@ BOARD_QUESTIONS = [
             "opgaver, escalation flow (linje 0-3) og hvad Priority 1 – Critical kræver.'"
         ),
         "groups": [
-            ("log, kategorisér og prioritér alle henvendelser",
-             [r"log", r"kategoris", r"prioriter"]),
-            ("Linje 0 = self-help (FAQ, wiki, chatbot)",
-             [r"linje\s*0", r"self.?help", r"faq", r"wiki", r"chatbot"]),
-            ("Linje 1 = servicedesk løser simple/kendte problemer",
-             [r"linje\s*1", r"service\s*desk", r"f[oø]rste.?linje"]),
-            ("Linje 2-3 = eksperter, nye/ukendte problemer",
-             [r"linje\s*2", r"2nd", r"3rd", r"ekspert", r"specialist"]),
-            ("P1: immediate response, ~1 times resolution, 2nd/3rd level",
-             [r"immediate", r"straks", r"1\s*(time|hour)", r"system\s+down"]),
+            (
+                "log, kategorisér og prioritér alle henvendelser",
+                [r"log", r"kategoris", r"prioriter"],
+            ),
+            (
+                "Linje 0 = self-help (FAQ, wiki, chatbot)",
+                [r"linje\s*0", r"self.?help", r"faq", r"wiki", r"chatbot"],
+            ),
+            (
+                "Linje 1 = servicedesk løser simple/kendte problemer",
+                [r"linje\s*1", r"service\s*desk", r"f[oø]rste.?linje"],
+            ),
+            (
+                "Linje 2-3 = eksperter, nye/ukendte problemer",
+                [r"linje\s*2", r"2nd", r"3rd", r"ekspert", r"specialist"],
+            ),
+            (
+                "P1: immediate response, ~1 times resolution, 2nd/3rd level",
+                [r"immediate", r"straks", r"1\s*(time|hour)", r"system\s+down"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -740,16 +783,36 @@ BOARD_QUESTIONS = [
             "de 7 R'er I skal afklare?'"
         ),
         "groups": [
-            ("Normal change -> CAB-godkendelse",
-             [r"normal\s+change", r"\bcab\b", r"change\s+advisory"]),
-            ("kender Standard og Emergency",
-             [r"standard\s+change", r"pre.?godkendt", r"emergency", r"ecab"]),
-            ("RFC + back-out/rollback-plan + testmiljø",
-             [r"\brfc\b", r"request\s+for\s+change", r"back.?out",
-              r"rollback", r"testmilj"]),
-            ("7 R'er (nævner mindst tre)",
-             [r"raised", r"reason", r"return", r"risks?", r"resources",
-              r"responsible", r"relationship"]),
+            (
+                "Normal change -> CAB-godkendelse",
+                [r"normal\s+change", r"\bcab\b", r"change\s+advisory"],
+            ),
+            (
+                "kender Standard og Emergency",
+                [r"standard\s+change", r"pre.?godkendt", r"emergency", r"ecab"],
+            ),
+            (
+                "RFC + back-out/rollback-plan + testmiljø",
+                [
+                    r"\brfc\b",
+                    r"request\s+for\s+change",
+                    r"back.?out",
+                    r"rollback",
+                    r"testmilj",
+                ],
+            ),
+            (
+                "7 R'er (nævner mindst tre)",
+                [
+                    r"raised",
+                    r"reason",
+                    r"return",
+                    r"risks?",
+                    r"resources",
+                    r"responsible",
+                    r"relationship",
+                ],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -773,18 +836,37 @@ BOARD_QUESTIONS = [
             "Contracts skal understøtte den.'"
         ),
         "groups": [
-            ("scope: hvilke services er dækket",
-             [r"scope", r"services?\b", r"omfang"]),
-            ("målbare mål: oppetid + response/resolution tider pr. prioritet",
-             [r"99[.,]9", r"oppetid", r"uptime", r"response\s*time",
-              r"resolution", r"reaktionstid"]),
-            ("måling og rapportering (KPI'er)",
-             [r"kpi", r"m[aå]l(ing|es)", r"rapport", r"metric"]),
-            ("konsekvenser/eskalation ved brud + ansvar",
-             [r"sanktion", r"konsekvens", r"eskaler", r"penalty", r"ansvar"]),
-            ("SLA = kunde; OLA = interne; UC = ekstern leverandør (skrappere)",
-             [r"ola", r"underpinning", r"\buc\b", r"skrapper", r"strammere",
-              r"underst[oø]t"]),
+            ("scope: hvilke services er dækket", [r"scope", r"services?\b", r"omfang"]),
+            (
+                "målbare mål: oppetid + response/resolution tider pr. prioritet",
+                [
+                    r"99[.,]9",
+                    r"oppetid",
+                    r"uptime",
+                    r"response\s*time",
+                    r"resolution",
+                    r"reaktionstid",
+                ],
+            ),
+            (
+                "måling og rapportering (KPI'er)",
+                [r"kpi", r"m[aå]l(ing|es)", r"rapport", r"metric"],
+            ),
+            (
+                "konsekvenser/eskalation ved brud + ansvar",
+                [r"sanktion", r"konsekvens", r"eskaler", r"penalty", r"ansvar"],
+            ),
+            (
+                "SLA = kunde; OLA = interne; UC = ekstern leverandør (skrappere)",
+                [
+                    r"ola",
+                    r"underpinning",
+                    r"\buc\b",
+                    r"skrapper",
+                    r"strammere",
+                    r"underst[oø]t",
+                ],
+            ),
         ],
         "points": 10,
         "threshold": 3,
@@ -807,17 +889,33 @@ BOARD_QUESTIONS = [
             "begreber og useradministration-lifecycle: on- og offboarding.'"
         ),
         "groups": [
-            ("Identification = hævder hvem du er",
-             [r"identifi", r"h[aæ]vder", r"brugernavn", r"claim"]),
-            ("Authentication = verificerer (MFA, biometri)",
-             [r"authenti", r"verific", r"password", r"mfa", r"biometri"]),
-            ("Authorization = adgang tildeles (RBAC/PoLP)",
-             [r"authori[sz]", r"rbac", r"least\s+privilege", r"polp"]),
-            ("Accountability = logging/audit",
-             [r"accountab", r"logg?ing", r"audit", r"siem", r"ansvar"]),
-            ("lifecycle: onboarding, rolleskift, offboarding (deaktiver først)",
-             [r"onboard", r"offboard", r"deaktiver", r"disable",
-              r"lifecycle", r"livscyklus"]),
+            (
+                "Identification = hævder hvem du er",
+                [r"identifi", r"h[aæ]vder", r"brugernavn", r"claim"],
+            ),
+            (
+                "Authentication = verificerer (MFA, biometri)",
+                [r"authenti", r"verific", r"password", r"mfa", r"biometri"],
+            ),
+            (
+                "Authorization = adgang tildeles (RBAC/PoLP)",
+                [r"authori[sz]", r"rbac", r"least\s+privilege", r"polp"],
+            ),
+            (
+                "Accountability = logging/audit",
+                [r"accountab", r"logg?ing", r"audit", r"siem", r"ansvar"],
+            ),
+            (
+                "lifecycle: onboarding, rolleskift, offboarding (deaktiver først)",
+                [
+                    r"onboard",
+                    r"offboard",
+                    r"deaktiver",
+                    r"disable",
+                    r"lifecycle",
+                    r"livscyklus",
+                ],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -841,18 +939,29 @@ BOARD_QUESTIONS = [
             "perspektiv. Forklar sammenhængen og de fire måder at behandle en risiko.'"
         ),
         "groups": [
-            ("CEO: RISK = Likelihood × Consequence",
-             [r"likelihood\s*[x*×]\s*consequence",
-              r"sandsynlighed\s*[x*×]\s*konsekvens"]),
-            ("Analytiker: RISK = Threat × Vulnerability × Impact",
-             [r"threat\s*[x*×]\s*vulnerab", r"trussel\s*[x*×]\s*s[aå]rbar"]),
-            ("Threat × Vulnerability = Likelihood",
-             [r"(threat|trussel).{0,40}=\s*likelihood",
-              r"udg[oø]r\s+likelihood"]),
-            ("risk matrix / score",
-             [r"matrix", r"score", r"extreme", r"gr[oø]n", r"r[oø]d"]),
-            ("4 behandlinger: Mitigate, Accept, Transfer, Avoid",
-             [r"mitigat", r"accept", r"transfer", r"avoid"]),
+            (
+                "CEO: RISK = Likelihood × Consequence",
+                [
+                    r"likelihood\s*[x*×]\s*consequence",
+                    r"sandsynlighed\s*[x*×]\s*konsekvens",
+                ],
+            ),
+            (
+                "Analytiker: RISK = Threat × Vulnerability × Impact",
+                [r"threat\s*[x*×]\s*vulnerab", r"trussel\s*[x*×]\s*s[aå]rbar"],
+            ),
+            (
+                "Threat × Vulnerability = Likelihood",
+                [r"(threat|trussel).{0,40}=\s*likelihood", r"udg[oø]r\s+likelihood"],
+            ),
+            (
+                "risk matrix / score",
+                [r"matrix", r"score", r"extreme", r"gr[oø]n", r"r[oø]d"],
+            ),
+            (
+                "4 behandlinger: Mitigate, Accept, Transfer, Avoid",
+                [r"mitigat", r"accept", r"transfer", r"avoid"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -876,17 +985,30 @@ BOARD_QUESTIONS = [
             "Hvad styrer Annex A-kontrolvalget, og hvordan er PDCA bygget ind?'"
         ),
         "groups": [
-            ("ISMS = samlet system; ISO 27001 = kravene",
-             [r"isms", r"management\s+system", r"ledelsessystem"]),
-            ("SoA = valgte/fravalgte kontroller og HVORFOR",
-             [r"soa", r"statement\s+of\s+applicability", r"fravalg"]),
-            ("RISIKOVURDERINGEN styrer kontrolvalget",
-             [r"risikovurdering", r"risk\s+assessment",
-              r"risiko.{0,40}(styrer|v[aæ]lger|driver)"]),
-            ("Annex A: 93 kontroller, 4 temaer",
-             [r"93", r"annex\s*a", r"4\s+temaer", r"organisatorisk"]),
-            ("PDCA i HLS: kap 4-6 Plan, 7-8 Do, 9 Check, 10 Act",
-             [r"pdca", r"plan.?do.?check.?act", r"kap(itel)?\s*4", r"hls"]),
+            (
+                "ISMS = samlet system; ISO 27001 = kravene",
+                [r"isms", r"management\s+system", r"ledelsessystem"],
+            ),
+            (
+                "SoA = valgte/fravalgte kontroller og HVORFOR",
+                [r"soa", r"statement\s+of\s+applicability", r"fravalg"],
+            ),
+            (
+                "RISIKOVURDERINGEN styrer kontrolvalget",
+                [
+                    r"risikovurdering",
+                    r"risk\s+assessment",
+                    r"risiko.{0,40}(styrer|v[aæ]lger|driver)",
+                ],
+            ),
+            (
+                "Annex A: 93 kontroller, 4 temaer",
+                [r"93", r"annex\s*a", r"4\s+temaer", r"organisatorisk"],
+            ),
+            (
+                "PDCA i HLS: kap 4-6 Plan, 7-8 Do, 9 Check, 10 Act",
+                [r"pdca", r"plan.?do.?check.?act", r"kap(itel)?\s*4", r"hls"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -910,15 +1032,26 @@ BOARD_QUESTIONS = [
             "på minor og major non-conformity.'"
         ),
         "groups": [
-            ("Stage 1 = dokumentationsgennemgang",
-             [r"stage\s*1.{0,80}(dokument|paper|politik)"]),
-            ("Stage 2 = feltevaluering (virker det i praksis?)",
-             [r"stage\s*2.{0,80}(praksis|felt|practice)"]),
-            ("årlige surveillance audits + re-certificering hvert 3. år",
-             [r"surveillance", r"3\.?\s*[aå]r", r"re.?certificer"]),
-            ("minor = isoleret; major = systemisk, kan blokere",
-             [r"minor.{0,80}(isoler|enkelt)", r"major.{0,80}(system|bloker)",
-              r"non.?conformit"]),
+            (
+                "Stage 1 = dokumentationsgennemgang",
+                [r"stage\s*1.{0,80}(dokument|paper|politik)"],
+            ),
+            (
+                "Stage 2 = feltevaluering (virker det i praksis?)",
+                [r"stage\s*2.{0,80}(praksis|felt|practice)"],
+            ),
+            (
+                "årlige surveillance audits + re-certificering hvert 3. år",
+                [r"surveillance", r"3\.?\s*[aå]r", r"re.?certificer"],
+            ),
+            (
+                "minor = isoleret; major = systemisk, kan blokere",
+                [
+                    r"minor.{0,80}(isoler|enkelt)",
+                    r"major.{0,80}(system|bloker)",
+                    r"non.?conformit",
+                ],
+            ),
         ],
         "points": 8,
         "threshold": 2,
@@ -944,15 +1077,22 @@ BOARD_QUESTIONS = [
             "GDPR-begreber er i spil? (JHB's øvelse)'"
         ),
         "groups": [
-            ("sikr dokumentet straks + rapportér til leder/DPO",
-             [r"sikr", r"beskyt", r"fjern", r"rapport", r"dpo", r"leder"]),
-            ("72-timers reglen: anmeld til Datatilsynet",
-             [r"72", r"datatilsynet", r"anmeld"]),
-            ("forebyg: Clear Desk Policy, besøgsregler",
-             [r"clear\s*desk", r"bes[oø]gs", r"printer", r"politik"]),
-            ("kender GDPR-begreber: DSAR, retten til at blive glemt, privacy by design",
-             [r"dsar", r"blive\s+glemt", r"privacy\s+by\s+design",
-              r"databehandler"]),
+            (
+                "sikr dokumentet straks + rapportér til leder/DPO",
+                [r"sikr", r"beskyt", r"fjern", r"rapport", r"dpo", r"leder"],
+            ),
+            (
+                "72-timers reglen: anmeld til Datatilsynet",
+                [r"72", r"datatilsynet", r"anmeld"],
+            ),
+            (
+                "forebyg: Clear Desk Policy, besøgsregler",
+                [r"clear\s*desk", r"bes[oø]gs", r"printer", r"politik"],
+            ),
+            (
+                "kender GDPR-begreber: DSAR, retten til at blive glemt, privacy by design",
+                [r"dsar", r"blive\s+glemt", r"privacy\s+by\s+design", r"databehandler"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -974,17 +1114,27 @@ BOARD_QUESTIONS = [
             "forskellen på SAN og NAS, 3-2-1-reglen – og hvad MAO er.'"
         ),
         "groups": [
-            ("agenten læser fra SQL, krypterer, sender til storage",
-             [r"agent.{0,120}(l[aæ]ser|henter|sender|krypter)",
-              r"backup\s*manager", r"storage\s*server"]),
-            ("inkrementel backup",
-             [r"inkrement", r"kun.{0,30}[aæ]ndr"]),
-            ("SAN = block-level; NAS = file-level",
-             [r"san.{0,80}block", r"nas.{0,80}file"]),
-            ("3-2-1 + TEST RESTORE",
-             [r"3.?2.?1", r"test.{0,30}(restore|gendan)", r"utestet"]),
-            ("MAO = RPO + RTO ≤ MAO, defineres i BIA",
-             [r"mao", r"rpo\s*\+\s*rto", r"\bbia\b"]),
+            (
+                "agenten læser fra SQL, krypterer, sender til storage",
+                [
+                    r"agent.{0,120}(l[aæ]ser|henter|sender|krypter)",
+                    r"backup\s*manager",
+                    r"storage\s*server",
+                ],
+            ),
+            ("inkrementel backup", [r"inkrement", r"kun.{0,30}[aæ]ndr"]),
+            (
+                "SAN = block-level; NAS = file-level",
+                [r"san.{0,80}block", r"nas.{0,80}file"],
+            ),
+            (
+                "3-2-1 + TEST RESTORE",
+                [r"3.?2.?1", r"test.{0,30}(restore|gendan)", r"utestet"],
+            ),
+            (
+                "MAO = RPO + RTO ≤ MAO, defineres i BIA",
+                [r"mao", r"rpo\s*\+\s*rto", r"\bbia\b"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -1008,16 +1158,26 @@ BOARD_QUESTIONS = [
             "nævn alle 5 niveauer og læg plan til Level 3. Må man springe?'"
         ),
         "groups": [
-            ("Level 1 Initial: ad hoc, hero-kultur",
-             [r"(level|niveau)\s*1", r"initial", r"ad\s*hoc", r"hero"]),
-            ("niveauerne: Managed, Defined, Quantitatively Managed, Optimizing",
-             [r"managed", r"defined", r"quantitat", r"optimi[sz]"]),
-            ("Level 3 = processer på ORGANISATIONSNIVEAU",
-             [r"organisationsniveau", r"samme\s+(regler|processer)"]),
-            ("må IKKE springe niveauer",
-             [r"ikke.{0,30}spring", r"cannot\s+skip", r"fundament"]),
-            ("plan: dokumentér, ITIL, metrics",
-             [r"dokumenter", r"itil", r"metric", r"staged", r"continuous"]),
+            (
+                "Level 1 Initial: ad hoc, hero-kultur",
+                [r"(level|niveau)\s*1", r"initial", r"ad\s*hoc", r"hero"],
+            ),
+            (
+                "niveauerne: Managed, Defined, Quantitatively Managed, Optimizing",
+                [r"managed", r"defined", r"quantitat", r"optimi[sz]"],
+            ),
+            (
+                "Level 3 = processer på ORGANISATIONSNIVEAU",
+                [r"organisationsniveau", r"samme\s+(regler|processer)"],
+            ),
+            (
+                "må IKKE springe niveauer",
+                [r"ikke.{0,30}spring", r"cannot\s+skip", r"fundament"],
+            ),
+            (
+                "plan: dokumentér, ITIL, metrics",
+                [r"dokumenter", r"itil", r"metric", r"staged", r"continuous"],
+            ),
         ],
         "points": 10,
         "threshold": 3,
@@ -1042,16 +1202,28 @@ BOARD_QUESTIONS = [
             "stadig fysisk server?'"
         ),
         "groups": [
-            ("Type 1 = bare-metal (ESXi, Hyper-V, KVM)",
-             [r"type\s*1.{0,120}(bare.?metal|direkte|esxi|hyper.?v|kvm)"]),
-            ("Type 2 = hosted (VirtualBox, Workstation)",
-             [r"type\s*2.{0,120}(hosted|oven|virtualbox|workstation)"]),
-            ("fordele: konsolidering, snapshots, skalering, failover",
-             [r"konsolider", r"snapshot", r"skaler", r"failover"]),
-            ("noisy neighbor + overhead",
-             [r"noisy\s+neighbor", r"overhead"]),
-            ("fysisk: HPC, store databaser, compliance",
-             [r"hpc", r"stor.{0,20}(database|sql)", r"complian", r"fysisk\s+isolation"]),
+            (
+                "Type 1 = bare-metal (ESXi, Hyper-V, KVM)",
+                [r"type\s*1.{0,120}(bare.?metal|direkte|esxi|hyper.?v|kvm)"],
+            ),
+            (
+                "Type 2 = hosted (VirtualBox, Workstation)",
+                [r"type\s*2.{0,120}(hosted|oven|virtualbox|workstation)"],
+            ),
+            (
+                "fordele: konsolidering, snapshots, skalering, failover",
+                [r"konsolider", r"snapshot", r"skaler", r"failover"],
+            ),
+            ("noisy neighbor + overhead", [r"noisy\s+neighbor", r"overhead"]),
+            (
+                "fysisk: HPC, store databaser, compliance",
+                [
+                    r"hpc",
+                    r"stor.{0,20}(database|sql)",
+                    r"complian",
+                    r"fysisk\s+isolation",
+                ],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -1074,13 +1246,18 @@ BOARD_QUESTIONS = [
             "efter 2 år, og sammenhængen med Change Management.'"
         ),
         "groups": [
-            ("ROI = (gevinst - investering) / investering × 100",
-             [r"gevinst\s*-\s*invest", r"return\s+on\s+investment"]),
-            ("20% / break-even under 2 år",
-             [r"40\.?000", r"20\s*%", r"break.?even"]),
-            ("ROI = business case til ledelsen; CM = kontrolleret gennemførelse",
-             [r"roi.{0,120}(ledelse|business\s*case|godkend)",
-              r"change\s*management.{0,120}(kontrol|kaos|risiko|back.?out)"]),
+            (
+                "ROI = (gevinst - investering) / investering × 100",
+                [r"gevinst\s*-\s*invest", r"return\s+on\s+investment"],
+            ),
+            ("20% / break-even under 2 år", [r"40\.?000", r"20\s*%", r"break.?even"]),
+            (
+                "ROI = business case til ledelsen; CM = kontrolleret gennemførelse",
+                [
+                    r"roi.{0,120}(ledelse|business\s*case|godkend)",
+                    r"change\s*management.{0,120}(kontrol|kaos|risiko|back.?out)",
+                ],
+            ),
         ],
         "points": 8,
         "threshold": 2,
@@ -1103,16 +1280,23 @@ BOARD_QUESTIONS = [
             "hybrid cloud. Hvad betyder Shared Responsibility Model?'"
         ),
         "groups": [
-            ("IaaS = rå infrastruktur/VMs",
-             [r"iaas.{0,80}(infrastruktur|hardware|vm)"]),
-            ("PaaS = platform til at udvikle",
-             [r"paas.{0,80}(platform|udvikl|milj)"]),
-            ("SaaS = færdigt program via browser (M365, e-conomic)",
-             [r"saas.{0,80}(f[aæ]rdig|program|browser|365)"]),
-            ("public/private/hybrid + elasticitet",
-             [r"public", r"private", r"hybrid", r"elastic", r"on.?demand"]),
-            ("Shared Responsibility: delt ansvar udbyder/kunde pr. lag",
-             [r"shared\s+responsibility", r"delt\s+ansvar"]),
+            (
+                "IaaS = rå infrastruktur/VMs",
+                [r"iaas.{0,80}(infrastruktur|hardware|vm)"],
+            ),
+            ("PaaS = platform til at udvikle", [r"paas.{0,80}(platform|udvikl|milj)"]),
+            (
+                "SaaS = færdigt program via browser (M365, e-conomic)",
+                [r"saas.{0,80}(f[aæ]rdig|program|browser|365)"],
+            ),
+            (
+                "public/private/hybrid + elasticitet",
+                [r"public", r"private", r"hybrid", r"elastic", r"on.?demand"],
+            ),
+            (
+                "Shared Responsibility: delt ansvar udbyder/kunde pr. lag",
+                [r"shared\s+responsibility", r"delt\s+ansvar"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -1134,17 +1318,31 @@ BOARD_QUESTIONS = [
             "Continuous Delivery og Continuous Deployment. IaC og MTTR.'"
         ),
         "groups": [
-            ("Dev belønnes for features, Ops straffes for nedetid",
-             [r"bel[oø]nn.{0,60}features", r"straffes.{0,60}nedetid",
-              r"inventors", r"mechanics"]),
-            ("CI = automatisk test + integration",
-             [r"\bci\b.{0,120}(auto|test|integr)"]),
-            ("Continuous Delivery = altid deployerbar, MANUEL deploy til prod",
-             [r"delivery.{0,140}(manuel|manual|godkend)"]),
-            ("Continuous Deployment = fuldt automatisk",
-             [r"deployment.{0,140}(auto|fuldt)", r"fuldt\s+auto"]),
-            ("IaC = programmerbar infrastruktur; MTTR forbedres",
-             [r"infrastructure\s+as\s+code", r"\biac\b", r"mttr"]),
+            (
+                "Dev belønnes for features, Ops straffes for nedetid",
+                [
+                    r"bel[oø]nn.{0,60}features",
+                    r"straffes.{0,60}nedetid",
+                    r"inventors",
+                    r"mechanics",
+                ],
+            ),
+            (
+                "CI = automatisk test + integration",
+                [r"\bci\b.{0,120}(auto|test|integr)"],
+            ),
+            (
+                "Continuous Delivery = altid deployerbar, MANUEL deploy til prod",
+                [r"delivery.{0,140}(manuel|manual|godkend)"],
+            ),
+            (
+                "Continuous Deployment = fuldt automatisk",
+                [r"deployment.{0,140}(auto|fuldt)", r"fuldt\s+auto"],
+            ),
+            (
+                "IaC = programmerbar infrastruktur; MTTR forbedres",
+                [r"infrastructure\s+as\s+code", r"\biac\b", r"mttr"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -1170,17 +1368,29 @@ BOARD_QUESTIONS = [
             "management products.'"
         ),
         "groups": [
-            ("PRojects IN Controlled Environments",
-             [r"controlled\s+environments"]),
-            ("Continued Business Justification: altid retfærdiggørligt",
-             [r"business\s+justification", r"retf[aæ]rdigg"]),
-            ("Manage by Exception: styregruppe kun ved problemer",
-             [r"exception.{0,120}(kun|problem|afvig)"]),
-            ("øvrige principper (mindst to)",
-             [r"learn\s+from\s+experience", r"roles", r"stages",
-              r"focus\s+on\s+products", r"tailor"]),
-            ("management products: Business Case, Risk Register, Lessons Log",
-             [r"business\s+case", r"risk\s+register", r"lessons\s+log"]),
+            ("PRojects IN Controlled Environments", [r"controlled\s+environments"]),
+            (
+                "Continued Business Justification: altid retfærdiggørligt",
+                [r"business\s+justification", r"retf[aæ]rdigg"],
+            ),
+            (
+                "Manage by Exception: styregruppe kun ved problemer",
+                [r"exception.{0,120}(kun|problem|afvig)"],
+            ),
+            (
+                "øvrige principper (mindst to)",
+                [
+                    r"learn\s+from\s+experience",
+                    r"roles",
+                    r"stages",
+                    r"focus\s+on\s+products",
+                    r"tailor",
+                ],
+            ),
+            (
+                "management products: Business Case, Risk Register, Lessons Log",
+                [r"business\s+case", r"risk\s+register", r"lessons\s+log"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -1206,17 +1416,30 @@ BOARD_QUESTIONS = [
             "firewall/IDS/IPS og DMZ.'"
         ),
         "groups": [
-            ("VLAN begrænser spredning (HR, Finance, Guest, Server)",
-             [r"vlan", r"segment", r"begr[aæ]ns.{0,40}(spredning|angreb)"]),
-            ("hub=lag 1, switch=lag 2, router=lag 3",
-             [r"hub.{0,60}(lag|layer)\s*1", r"switch.{0,60}(lag|layer)\s*2",
-              r"router.{0,60}(lag|layer)\s*3"]),
-            ("firewall filtrerer trafik",
-             [r"firewall.{0,80}(filtrer|regler|deny|bloker)"]),
-            ("IDS opdager / IPS blokerer; honeypot",
-             [r"ids", r"ips", r"intrusion", r"honeypot"]),
-            ("DMZ isolerer offentlige services fra internt net",
-             [r"dmz", r"demilitari", r"subnet"]),
+            (
+                "VLAN begrænser spredning (HR, Finance, Guest, Server)",
+                [r"vlan", r"segment", r"begr[aæ]ns.{0,40}(spredning|angreb)"],
+            ),
+            (
+                "hub=lag 1, switch=lag 2, router=lag 3",
+                [
+                    r"hub.{0,60}(lag|layer)\s*1",
+                    r"switch.{0,60}(lag|layer)\s*2",
+                    r"router.{0,60}(lag|layer)\s*3",
+                ],
+            ),
+            (
+                "firewall filtrerer trafik",
+                [r"firewall.{0,80}(filtrer|regler|deny|bloker)"],
+            ),
+            (
+                "IDS opdager / IPS blokerer; honeypot",
+                [r"ids", r"ips", r"intrusion", r"honeypot"],
+            ),
+            (
+                "DMZ isolerer offentlige services fra internt net",
+                [r"dmz", r"demilitari", r"subnet"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -1238,16 +1461,26 @@ BOARD_QUESTIONS = [
             "med AD, GPO og MDM – og MDM vs MAM i BYOD.'"
         ),
         "groups": [
-            ("AD-konto oprettes (PowerShell/CSV) i OU",
-             [r"new-aduser", r"powershell", r"\bou\b", r"active\s*directory"]),
-            ("GPO pusher konfiguration til OU'ens maskiner",
-             [r"gpo", r"group\s*policy", r"push.{0,40}konfig"]),
-            ("MDM (Intune) enroller enheder via Azure AD",
-             [r"mdm", r"intune", r"enroll"]),
-            ("PoLP/RBAC: kun nødvendige rettigheder",
-             [r"polp", r"least\s+privilege", r"rbac"]),
-            ("MDM = hele enheden; MAM = kun firmadata (BYOD)",
-             [r"mam", r"byod", r"remote\s*wipe", r"hele\s+enheden"]),
+            (
+                "AD-konto oprettes (PowerShell/CSV) i OU",
+                [r"new-aduser", r"powershell", r"\bou\b", r"active\s*directory"],
+            ),
+            (
+                "GPO pusher konfiguration til OU'ens maskiner",
+                [r"gpo", r"group\s*policy", r"push.{0,40}konfig"],
+            ),
+            (
+                "MDM (Intune) enroller enheder via Azure AD",
+                [r"mdm", r"intune", r"enroll"],
+            ),
+            (
+                "PoLP/RBAC: kun nødvendige rettigheder",
+                [r"polp", r"least\s+privilege", r"rbac"],
+            ),
+            (
+                "MDM = hele enheden; MAM = kun firmadata (BYOD)",
+                [r"mam", r"byod", r"remote\s*wipe", r"hele\s+enheden"],
+            ),
         ],
         "points": 8,
         "threshold": 3,
@@ -1273,16 +1506,32 @@ BOARD_QUESTIONS = [
             "og de tre elementer i 2FA.'"
         ),
         "groups": [
-            ("symmetrisk = én delt nøgle; asymmetrisk = public/private (HTTPS)",
-             [r"symmetrisk.{0,120}(en|delt|samme)\s*n[oø]gle",
-              r"asymmetrisk.{0,120}(public|private|offentlig|privat)"]),
-            ("hashing = envejs, kan ikke gendannes",
-             [r"envejs", r"one.?way", r"ikke\s+gendan"]),
-            ("Diffie-Hellman = nøgleudveksling over usikker kanal (TLS/SSH)",
-             [r"diffie", r"n[oø]gleudveksling", r"usikker\s+(kanal|forbindelse)"]),
-            ("2FA = HAVE + KNOW + ARE (kombination af to)",
-             [r"have", r"\bare\b", r"know", r"noget\s+du\s+(har|er|ved)",
-              r"2fa", r"mfa"]),
+            (
+                "symmetrisk = én delt nøgle; asymmetrisk = public/private (HTTPS)",
+                [
+                    r"symmetrisk.{0,120}(en|delt|samme)\s*n[oø]gle",
+                    r"asymmetrisk.{0,120}(public|private|offentlig|privat)",
+                ],
+            ),
+            (
+                "hashing = envejs, kan ikke gendannes",
+                [r"envejs", r"one.?way", r"ikke\s+gendan"],
+            ),
+            (
+                "Diffie-Hellman = nøgleudveksling over usikker kanal (TLS/SSH)",
+                [r"diffie", r"n[oø]gleudveksling", r"usikker\s+(kanal|forbindelse)"],
+            ),
+            (
+                "2FA = HAVE + KNOW + ARE (kombination af to)",
+                [
+                    r"have",
+                    r"\bare\b",
+                    r"know",
+                    r"noget\s+du\s+(har|er|ved)",
+                    r"2fa",
+                    r"mfa",
+                ],
+            ),
         ],
         "points": 8,
         "threshold": 3,

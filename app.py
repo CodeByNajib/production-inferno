@@ -35,7 +35,8 @@ st.set_page_config(
 # CUSTOM CSS  – dark terminal feel, amber accent, no default Streamlit padding
 # ---------------------------------------------------------------------------
 
-st.markdown("""
+st.markdown(
+    """
 <style>
 /* Base */
 [data-testid="stAppViewContainer"] {
@@ -126,12 +127,15 @@ div[data-testid="stSidebarContent"] .stButton > button {
     margin-bottom: 4px;
 }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 
 # ---------------------------------------------------------------------------
 # SESSION STATE INIT
 # ---------------------------------------------------------------------------
+
 
 def _init():
     defaults = {
@@ -148,14 +152,16 @@ def _init():
         "board_index": 0,
         "board_score": 0,
         "board_max": 0,
-        "board_answers": [],   # list of dicts with result info
+        "board_answers": [],  # list of dicts with result info
         "board_done": False,
+        "board_started": False,
         # Global scoreboard
         "scores": {},  # { module_name: {"points": x, "max": y} }
     }
     for k, v in defaults.items():
         if k not in st.session_state:
             st.session_state[k] = v
+
 
 _init()
 
@@ -167,8 +173,8 @@ TOPICS = sorted({q["topic"] for q in QUIZ_QUESTIONS})
 GRADE_COLORS = {
     "12": "pill-green",
     "10": "pill-green",
-    "7":  "pill-blue",
-    "4":  "pill-amber",
+    "7": "pill-blue",
+    "4": "pill-amber",
     "02": "pill-amber",
     "00/−3": "pill-red",
 }
@@ -183,9 +189,12 @@ def card(content, style=""):
 
 
 def pct_color(pct):
-    if pct >= 78: return "pill-green"
-    if pct >= 60: return "pill-blue"
-    if pct >= 40: return "pill-amber"
+    if pct >= 78:
+        return "pill-green"
+    if pct >= 60:
+        return "pill-blue"
+    if pct >= 40:
+        return "pill-amber"
     return "pill-red"
 
 
@@ -198,17 +207,21 @@ def set_page(name):
 # SIDEBAR
 # ---------------------------------------------------------------------------
 
+
 def sidebar():
     with st.sidebar:
         st.markdown("## 🔥 Production Inferno")
-        st.markdown('<p style="color:#6e7681;font-size:0.8rem;margin-top:-0.5rem;">IT-Drift Exam Trainer</p>', unsafe_allow_html=True)
+        st.markdown(
+            '<p style="color:#6e7681;font-size:0.8rem;margin-top:-0.5rem;">IT-Drift Exam Trainer</p>',
+            unsafe_allow_html=True,
+        )
         st.divider()
 
         nav = [
-            ("🏠 Forside",         "home"),
-            ("⚡ Quiz",            "quiz"),
-            ("🎓 Eksamensboard",   "board"),
-            ("📊 Scoreboard",      "scores"),
+            ("🏠 Forside", "home"),
+            ("⚡ Quiz", "quiz"),
+            ("🎓 Eksamensboard", "board"),
+            ("📊 Scoreboard", "scores"),
         ]
         for label, page in nav:
             active = st.session_state.page == page
@@ -226,17 +239,21 @@ def sidebar():
                     p = round(100 * sc["points"] / sc["max"])
                     g, _ = danish_grade(p)
                     st.markdown(
-                        f'<small>{name}: {sc["points"]}/{sc["max"]} '
-                        f'{pill(g, GRADE_COLORS.get(g, "pill-blue"))}</small>',
+                        f"<small>{name}: {sc['points']}/{sc['max']} "
+                        f"{pill(g, GRADE_COLORS.get(g, 'pill-blue'))}</small>",
                         unsafe_allow_html=True,
                     )
         st.divider()
-        st.markdown('<p style="color:#6e7681;font-size:0.75rem;">EK/KEA IT-Drift pensum<br/>Made by Najib Nawabi</p>', unsafe_allow_html=True)
+        st.markdown(
+            '<p style="color:#6e7681;font-size:0.75rem;">EK/KEA IT-Drift pensum<br/>Made by Najib Nawabi</p>',
+            unsafe_allow_html=True,
+        )
 
 
 # ---------------------------------------------------------------------------
 # HOME PAGE
 # ---------------------------------------------------------------------------
+
 
 def page_home():
     st.markdown("# 🔥 Production Inferno")
@@ -246,32 +263,41 @@ def page_home():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.markdown("""
+        st.markdown(
+            """
 <div class="card card-amber">
 <h4>⚡ Quiz</h4>
 <p>30+ multiple choice spørgsmål på tværs af hele pensum. Hurtig scanning af definitioner og fakta.</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+            unsafe_allow_html=True,
+        )
         if st.button("Start Quiz →", key="home_quiz"):
             set_page("quiz")
 
     with col2:
-        st.markdown("""
+        st.markdown(
+            """
 <div class="card card-blue">
 <h4>🎓 Eksamensboard</h4>
 <p>20 fri-tekst spørgsmål bygget på EK/KEA-pensum. Svar som til den rigtige mundtlige eksamen.</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+            unsafe_allow_html=True,
+        )
         if st.button("Start Board →", key="home_board"):
             set_page("board")
 
     with col3:
-        st.markdown("""
+        st.markdown(
+            """
 <div class="card card-purple">
 <h4>📊 Scoreboard</h4>
 <p>Se dine samlede scores på tværs af quiz og board, med dansk karakter.</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+            unsafe_allow_html=True,
+        )
         if st.button("Se Scores →", key="home_scores"):
             set_page("scores")
 
@@ -279,9 +305,15 @@ def page_home():
     st.markdown("#### 📚 Pensum dækket")
 
     topics_grid = [
-        ("ITIL 4", "Service Value Chain, Guiding Principles, Incident/Problem/Change/Release Management, CMDB, Servicedesk"),
+        (
+            "ITIL 4",
+            "Service Value Chain, Guiding Principles, Incident/Problem/Change/Release Management, CMDB, Servicedesk",
+        ),
         ("ISO 27001", "ISMS, SoA, Annex A, PDCA/HLS, Stage 1/2 audit, non-conformity"),
-        ("Risikoanalyse", "CIA-triaden, iAAA, risikoformler (CEO vs analytiker), 4 behandlingsformer, risk matrix"),
+        (
+            "Risikoanalyse",
+            "CIA-triaden, iAAA, risikoformler (CEO vs analytiker), 4 behandlingsformer, risk matrix",
+        ),
         ("GDPR", "72-timers regel, DSAR, privacy by design, databehandleraftale"),
         ("SLA/OLA/UC", "SLA-design, OLA/UC-hierarki, KPI'er og eskalation"),
         ("CMMI", "5 modenhedsniveauer, staged vs continuous, business case"),
@@ -296,17 +328,21 @@ def page_home():
     cols = st.columns(2)
     for i, (topic, desc) in enumerate(topics_grid):
         with cols[i % 2]:
-            st.markdown(f"""
+            st.markdown(
+                f"""
 <div class="card card-blue" style="padding:0.8rem 1rem;margin-bottom:0.6rem;">
 <strong style="color:#79c0ff;">{topic}</strong>
 <p style="font-size:0.82rem;margin:0.3rem 0 0 0;">{desc}</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+                unsafe_allow_html=True,
+            )
 
 
 # ---------------------------------------------------------------------------
 # QUIZ PAGE
 # ---------------------------------------------------------------------------
+
 
 def _start_quiz(filtered_qs):
     qs = filtered_qs.copy()
@@ -330,9 +366,11 @@ def page_quiz():
         topic_opts = ["Alle emner"] + TOPICS
         chosen = st.selectbox("Filtrér på emne:", topic_opts, key="quiz_topic_sel")
 
-        filtered = QUIZ_QUESTIONS if chosen == "Alle emner" else [
-            q for q in QUIZ_QUESTIONS if q["topic"] == chosen
-        ]
+        filtered = (
+            QUIZ_QUESTIONS
+            if chosen == "Alle emner"
+            else [q for q in QUIZ_QUESTIONS if q["topic"] == chosen]
+        )
         st.markdown(f"**{len(filtered)} spørgsmål klar**")
 
         if st.button("🚀 Start quiz"):
@@ -348,13 +386,16 @@ def page_quiz():
         pct = round(100 * score / total) if total else 0
         grade, label = danish_grade(pct)
 
-        st.markdown(f"""
-<div class="card card-{'green' if pct >= 60 else 'red'}">
+        st.markdown(
+            f"""
+<div class="card card-{"green" if pct >= 60 else "red"}">
 <h3>Quiz færdig!</h3>
 <p>Rigtige svar: <strong>{score}/{total}</strong> ({pct}%)</p>
-<p>Karakter: {pill(grade, GRADE_COLORS.get(grade, 'pill-blue'))} – {label}</p>
+<p>Karakter: {pill(grade, GRADE_COLORS.get(grade, "pill-blue"))} – {label}</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+            unsafe_allow_html=True,
+        )
 
         # Save to scoreboard
         st.session_state.scores["Quiz"] = {"points": score, "max": total}
@@ -362,9 +403,15 @@ def page_quiz():
         col1, col2 = st.columns(2)
         with col1:
             if st.button("🔄 Prøv igen (samme emner)"):
-                filtered = QUIZ_QUESTIONS if st.session_state.quiz_topic_filter == "Alle emner" else [
-                    q for q in QUIZ_QUESTIONS if q["topic"] == st.session_state.quiz_topic_filter
-                ]
+                filtered = (
+                    QUIZ_QUESTIONS
+                    if st.session_state.quiz_topic_filter == "Alle emner"
+                    else [
+                        q
+                        for q in QUIZ_QUESTIONS
+                        if q["topic"] == st.session_state.quiz_topic_filter
+                    ]
+                )
                 _start_quiz(filtered)
                 st.rerun()
         with col2:
@@ -387,14 +434,19 @@ def page_quiz():
     q = qs[idx]
     progress = idx / total
     st.progress(progress)
-    st.markdown(f'<small style="color:#6e7681;">{idx + 1} / {total} &nbsp;·&nbsp; {q["topic"]}</small>', unsafe_allow_html=True)
+    st.markdown(
+        f'<small style="color:#6e7681;">{idx + 1} / {total} &nbsp;·&nbsp; {q["topic"]}</small>',
+        unsafe_allow_html=True,
+    )
     st.markdown(f"### {q['question']}")
 
     answered = st.session_state.quiz_answered
     selected = st.session_state.quiz_selected
 
     if not answered:
-        choice = st.radio("Vælg svar:", q["options"], key=f"quiz_radio_{idx}", index=None)
+        choice = st.radio(
+            "Vælg svar:", q["options"], key=f"quiz_radio_{idx}", index=None
+        )
         if st.button("✅ Svar", disabled=(choice is None)):
             st.session_state.quiz_selected = choice
             st.session_state.quiz_answered = True
@@ -410,17 +462,24 @@ def page_quiz():
             elif selected and selected.startswith(letter) and letter != correct:
                 st.markdown(f'<p class="miss">❌ {opt}</p>', unsafe_allow_html=True)
             else:
-                st.markdown(f'<p style="color:#6e7681;">{opt}</p>', unsafe_allow_html=True)
+                st.markdown(
+                    f'<p style="color:#6e7681;">{opt}</p>', unsafe_allow_html=True
+                )
 
         is_correct = selected and selected.startswith(correct)
         result_style = "card-green" if is_correct else "card-red"
-        result_icon = "✅ Korrekt!" if is_correct else f"❌ Forkert – korrekt svar: {correct}"
-        st.markdown(f"""
+        result_icon = (
+            "✅ Korrekt!" if is_correct else f"❌ Forkert – korrekt svar: {correct}"
+        )
+        st.markdown(
+            f"""
 <div class="card {result_style}" style="margin-top:0.8rem;">
 <strong>{result_icon}</strong><br/>
-<span style="font-size:0.9rem;">{q['explanation']}</span>
+<span style="font-size:0.9rem;">{q["explanation"]}</span>
 </div>
-""", unsafe_allow_html=True)
+""",
+            unsafe_allow_html=True,
+        )
 
         col1, col2 = st.columns([1, 3])
         with col1:
@@ -443,12 +502,18 @@ def page_quiz():
 # BOARD PAGE  (free text oral exam)
 # ---------------------------------------------------------------------------
 
+
 def _start_board():
     st.session_state.board_index = 0
     st.session_state.board_score = 0
     st.session_state.board_max = sum(q["points"] for q in BOARD_QUESTIONS)
     st.session_state.board_answers = []
     st.session_state.board_done = False
+    st.session_state.board_started = True
+    # Clear old results
+    for key in list(st.session_state.keys()):
+        if key.startswith("board_result_"):
+            del st.session_state[key]
 
 
 def page_board():
@@ -457,8 +522,9 @@ def page_board():
     st.divider()
 
     # --- Not started ---
-    if not st.session_state.board_answers and not st.session_state.board_done and st.session_state.board_index == 0:
-        st.markdown("""
+    if not st.session_state.board_started:
+        st.markdown(
+            """
 <div class="card card-amber">
 <h4>Sådan fungerer boardet</h4>
 <ul>
@@ -468,7 +534,9 @@ def page_board():
 <li>Hvert spørgsmål afsluttes med en Senior Engineer Post-Mortem</li>
 </ul>
 </div>
-""", unsafe_allow_html=True)
+""",
+            unsafe_allow_html=True,
+        )
         if st.button("🎓 Start eksamensboard"):
             _start_board()
             st.rerun()
@@ -481,13 +549,16 @@ def page_board():
         pct = round(100 * pts / mx) if mx else 0
         grade, label = danish_grade(pct)
 
-        st.markdown(f"""
-<div class="card card-{'green' if pct >= 60 else 'red'}">
+        st.markdown(
+            f"""
+<div class="card card-{"green" if pct >= 60 else "red"}">
 <h3>Board færdig!</h3>
 <p>Score: <strong>{pts}/{mx}</strong> ({pct}%)</p>
-<p>Simlueret karakter: {pill(grade, GRADE_COLORS.get(grade, 'pill-blue'))} – {label}</p>
+<p>Simlueret karakter: {pill(grade, GRADE_COLORS.get(grade, "pill-blue"))} – {label}</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+            unsafe_allow_html=True,
+        )
 
         # Save to scoreboard
         st.session_state.scores["Board"] = {"points": pts, "max": mx}
@@ -497,16 +568,22 @@ def page_board():
         for a in st.session_state.board_answers:
             q_pct = round(100 * a["awarded"] / a["points"]) if a["points"] else 0
             color = "green" if q_pct >= 60 else "red"
-            with st.expander(f"{'✅' if q_pct >= 60 else '❌'} {a['topic']} – {a['awarded']}/{a['points']} pts"):
+            with st.expander(
+                f"{'✅' if q_pct >= 60 else '❌'} {a['topic']} – {a['awarded']}/{a['points']} pts"
+            ):
                 st.markdown(f"**Spørgsmål:** {a['question'][:120]}...")
                 if a["hits"]:
                     st.markdown("**Rammer:**")
                     for h in a["hits"]:
-                        st.markdown(f'<span class="hit">+ {h}</span>', unsafe_allow_html=True)
+                        st.markdown(
+                            f'<span class="hit">+ {h}</span>', unsafe_allow_html=True
+                        )
                 if a["missed"]:
                     st.markdown("**Manglede:**")
                     for m in a["missed"]:
-                        st.markdown(f'<span class="miss">– {m}</span>', unsafe_allow_html=True)
+                        st.markdown(
+                            f'<span class="miss">– {m}</span>', unsafe_allow_html=True
+                        )
                 st.markdown("**Post-mortem:**")
                 st.info(a["post_mortem"])
 
@@ -534,15 +611,18 @@ def page_board():
     st.progress(progress)
     st.markdown(
         f'<small style="color:#6e7681;">Spørgsmål {idx + 1} / {total} &nbsp;·&nbsp; '
-        f'{q["topic"]} &nbsp;·&nbsp; {q["points"]} point</small>',
+        f"{q['topic']} &nbsp;·&nbsp; {q['points']} point</small>",
         unsafe_allow_html=True,
     )
 
-    st.markdown(f"""
+    st.markdown(
+        f"""
 <div class="card card-blue">
-<p style="font-size:1rem;font-style:italic;">"{q['question']}"</p>
+<p style="font-size:1rem;font-style:italic;">"{q["question"]}"</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+        unsafe_allow_html=True,
+    )
 
     answer_key = f"board_answer_{idx}"
     answer = st.text_area(
@@ -553,24 +633,32 @@ def page_board():
     )
 
     submit_key = f"board_submit_{idx}"
-    if st.button("📝 Indsend svar", key=submit_key, disabled=(not answer or not answer.strip())):
+    if st.button(
+        "📝 Indsend svar", key=submit_key, disabled=(not answer or not answer.strip())
+    ):
         hits, missed, passed = grade_answer(answer, q["groups"], q.get("threshold"))
-        awarded = round(q["points"] * len(hits) / len(q["groups"])) if q["groups"] else 0
+        awarded = (
+            round(q["points"] * len(hits) / len(q["groups"])) if q["groups"] else 0
+        )
         st.session_state.board_score += awarded
-        st.session_state.board_answers.append({
-            "topic": q["topic"],
-            "question": q["question"],
+        st.session_state.board_answers.append(
+            {
+                "topic": q["topic"],
+                "question": q["question"],
+                "hits": hits,
+                "missed": missed,
+                "awarded": awarded,
+                "points": q["points"],
+                "post_mortem": q["post_mortem"],
+                "post_mortem_title": q["post_mortem_title"],
+            }
+        )
+        # Store result to display below
+        st.session_state[f"board_result_{idx}"] = {
             "hits": hits,
             "missed": missed,
             "awarded": awarded,
-            "points": q["points"],
-            "post_mortem": q["post_mortem"],
-            "post_mortem_title": q["post_mortem_title"],
-        })
-        # Store result to display below
-        st.session_state[f"board_result_{idx}"] = {
-            "hits": hits, "missed": missed,
-            "awarded": awarded, "passed": passed,
+            "passed": passed,
         }
         st.rerun()
 
@@ -580,28 +668,45 @@ def page_board():
         color = "green" if result["passed"] else "red"
         pct_q = round(100 * result["awarded"] / q["points"]) if q["points"] else 0
 
-        st.markdown(f"""
+        st.markdown(
+            f"""
 <div class="card card-{color}" style="margin-top:0.5rem;">
-<strong>Score: {result['awarded']}/{q['points']} point ({pct_q}%)</strong>
+<strong>Score: {result["awarded"]}/{q["points"]} point ({pct_q}%)</strong>
 </div>
-""", unsafe_allow_html=True)
+""",
+            unsafe_allow_html=True,
+        )
 
         col_hits, col_miss = st.columns(2)
         with col_hits:
             if result["hits"]:
                 st.markdown("**✅ Koncepter du ramte:**")
                 for h in result["hits"]:
-                    st.markdown(f'<span class="hit">+ {h}</span>', unsafe_allow_html=True)
+                    st.markdown(
+                        f'<span class="hit">+ {h}</span>', unsafe_allow_html=True
+                    )
         with col_miss:
             if result["missed"]:
                 st.markdown("**❌ Censoren ville høre:**")
                 for m in result["missed"]:
-                    st.markdown(f'<span class="miss">– {m}</span>', unsafe_allow_html=True)
+                    st.markdown(
+                        f'<span class="miss">– {m}</span>', unsafe_allow_html=True
+                    )
 
         with st.expander(f"📋 Post-Mortem: {q['post_mortem_title']}"):
             st.markdown(q["post_mortem"])
 
-        running_pct = round(100 * st.session_state.board_score / q["points"] / (idx + 1) * len(q["groups"])) if q["points"] else 0
+        running_pct = (
+            round(
+                100
+                * st.session_state.board_score
+                / q["points"]
+                / (idx + 1)
+                * len(q["groups"])
+            )
+            if q["points"]
+            else 0
+        )
 
         if st.button("Næste spørgsmål →", key=f"board_next_{idx}"):
             st.session_state.board_index += 1
@@ -612,17 +717,21 @@ def page_board():
 # SCORES PAGE
 # ---------------------------------------------------------------------------
 
+
 def page_scores():
     st.markdown("# 📊 Scoreboard")
     st.divider()
 
     scores = st.session_state.scores
     if not scores:
-        st.markdown("""
+        st.markdown(
+            """
 <div class="card card-amber">
 <p>Ingen scores endnu. Gennemfør Quiz eller Eksamensboard for at se dine resultater her.</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+            unsafe_allow_html=True,
+        )
         col1, col2 = st.columns(2)
         with col1:
             if st.button("⚡ Start Quiz"):
@@ -637,13 +746,16 @@ def page_scores():
     total_pct = round(100 * total_pts / total_max) if total_max else 0
     grade, label = danish_grade(total_pct)
 
-    st.markdown(f"""
-<div class="card card-{'green' if total_pct >= 60 else 'red'}">
+    st.markdown(
+        f"""
+<div class="card card-{"green" if total_pct >= 60 else "red"}">
 <h3>Samlet resultat</h3>
 <p><strong>{total_pts}/{total_max} point</strong> ({total_pct}%)</p>
-<p>Simuleret karakter: {pill(grade, GRADE_COLORS.get(grade, 'pill-blue'))} &nbsp; {label}</p>
+<p>Simuleret karakter: {pill(grade, GRADE_COLORS.get(grade, "pill-blue"))} &nbsp; {label}</p>
 </div>
-""", unsafe_allow_html=True)
+""",
+        unsafe_allow_html=True,
+    )
 
     st.markdown("#### Breakdown")
     for name, sc in scores.items():
@@ -658,9 +770,15 @@ def page_scores():
             st.markdown(f"**{name}**")
             st.progress(bar_val)
         with col2:
-            st.markdown(f'<p style="margin-top:0.3rem;">{sc["points"]}/{sc["max"]} ({p}%)</p>', unsafe_allow_html=True)
+            st.markdown(
+                f'<p style="margin-top:0.3rem;">{sc["points"]}/{sc["max"]} ({p}%)</p>',
+                unsafe_allow_html=True,
+            )
         with col3:
-            st.markdown(f'{pill(g, GRADE_COLORS.get(g, "pill-blue"))} {lbl}', unsafe_allow_html=True)
+            st.markdown(
+                f"{pill(g, GRADE_COLORS.get(g, 'pill-blue'))} {lbl}",
+                unsafe_allow_html=True,
+            )
 
     st.divider()
     st.markdown("#### Karakterskala")
@@ -671,7 +789,7 @@ def page_scores():
     for row in scale_data:
         g = row["Karakter"]
         st.markdown(
-            f'{pill(g, GRADE_COLORS.get(g, "pill-blue"))} &nbsp; '
+            f"{pill(g, GRADE_COLORS.get(g, 'pill-blue'))} &nbsp; "
             f'<span style="color:#c9d1d9;">{row["Fra"]}+ &nbsp;·&nbsp; {row["Beskrivelse"]}</span>',
             unsafe_allow_html=True,
         )
